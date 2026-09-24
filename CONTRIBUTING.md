@@ -33,8 +33,6 @@ something it doesn't mention.
 - **One logical change per pull request.** Fill in the template: what changed, why, and
   how you verified it.
 - **Link the issue** it resolves.
-- **Say if you used AI assistance** substantially (writing code, tests or docs). That's
-  fine, and it's held to exactly the same bar.
 
 ## The bar every change meets
 
