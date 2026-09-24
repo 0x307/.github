@@ -25,7 +25,3 @@
 ## Dependencies added
 
 <!-- Each new crate and why. "None" if none. -->
-
-## AI assistance
-
-<!-- None, or what was AI-assisted (code, tests, docs) and how you checked it. -->
