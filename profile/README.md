@@ -1,27 +1,35 @@
 # 0x307
 
-Open-source post-quantum cryptography for Rust and WASM: identity, signing, key exchange, and an agent-held wallet. Everything here is Apache-2.0 and published on crates.io.
+**0x307 publishes the post-quantum primitives it builds its own products on.** FIPS 203, 204
+and 205 in pure Rust, `no_std` and WASM-ready, with the test vectors and the unfinished parts
+both in public.
 
-## Identity
+Start with [`aethel-sdk`](https://github.com/0x307/aethel-sdk#quickstart), or run
+[the examples](https://github.com/0x307/examples): one program per crate, pinned to the
+published versions. Overview, tiers and licenses: [0x307.com/crates](https://0x307.com/crates).
 
-| Crate | What it does |
-|---|---|
-| [`aethel-core`](https://github.com/0x307/aethel-core) · [crates.io](https://crates.io/crates/aethel-core) | Post-quantum anonymous identity: per-context identifiers, zero-knowledge selective disclosure, context-bound ML-DSA signing. Ships a WebAssembly component. |
-| [`aethel-sdk`](https://github.com/0x307/aethel-sdk) · [crates.io](https://crates.io/crates/aethel-sdk) | Ergonomic Rust SDK over aethel-core: generate, sign, verify, project, disclose, recover. |
-| [`aethel-vault`](https://github.com/0x307/aethel-runtime) · [crates.io](https://crates.io/crates/aethel-vault) | Agent-held wallet. Policy-gated EIP-3009/x402 USDC signing with ML-DSA-65 spend intents and receipts; optional FHE confidential ledger. |
+## The crates
 
-## Primitives
+| Crate | Tier | What it does | License |
+|---|---|---|---|
+| [`pqc-sig`](https://github.com/0x307/pqc-sig) · [crates.io](https://crates.io/crates/pqc-sig) | Production | ML-DSA, SLH-DSA and FN-DSA signatures (FIPS 204/205/206) | MIT OR Apache-2.0 |
+| [`pqc-kem`](https://github.com/0x307/pqc-kem) · [crates.io](https://crates.io/crates/pqc-kem) | Production | ML-KEM (FIPS 203), the X25519 + ML-KEM-768 hybrid (default), X-Wing, and sealed boxes | MIT OR Apache-2.0 |
+| [`aethel-core`](https://github.com/0x307/aethel-core) · [crates.io](https://crates.io/crates/aethel-core) | Production | Post-quantum anonymous identity: a separate identifier per context, no reusable public key, context-bound ML-DSA signing. Selective disclosure ships and is being hardened | Apache-2.0 |
+| [`aethel-sdk`](https://github.com/0x307/aethel-sdk) · [crates.io](https://crates.io/crates/aethel-sdk) | Preview | The SDK over aethel-core: generate, sign, verify, project, recover. The place to start | Apache-2.0 |
+| [`aethel-vault`](https://github.com/0x307/aethel-runtime) · [crates.io](https://crates.io/crates/aethel-vault) | Preview | Agent-held wallet: policy-gated x402 / EIP-3009 signing with ML-DSA-65 spend records | Apache-2.0 |
+| [`pqc-privacy`](https://github.com/0x307/pqc-privacy) · [crates.io](https://crates.io/crates/pqc-privacy) | Lab | Research bundle, kept off every identity and payment path | MIT OR Apache-2.0 |
 
-| Crate | What it does |
-|---|---|
-| [`pqc-sig`](https://github.com/0x307/pqc-sig) · [crates.io](https://crates.io/crates/pqc-sig) | ML-DSA (FIPS 204), SLH-DSA (FIPS 205), FN-DSA (FIPS 206) signatures. Standalone, WASM-compatible. |
-| [`pqc-kem`](https://github.com/0x307/pqc-kem) · [crates.io](https://crates.io/crates/pqc-kem) | ML-KEM (FIPS 203) and hybrid X25519+ML-KEM-768 key encapsulation. Standalone, WASM-compatible. |
-| [`pqc-privacy`](https://github.com/0x307/pqc-privacy) · [crates.io](https://crates.io/crates/pqc-privacy) | ML-KEM/ML-DSA key exchange and signing, AES-GCM encryption, erasure-coded sharding, plus clearly labeled experimental privacy primitives. |
+**Production** crates are thin, standards-bound libraries meant to be depended on today.
+**Preview** crates work and are published, with APIs still settling. **Lab** crates are
+research, never on an identity or payment path.
 
-## Networking
+Also published: [`witan`](https://github.com/0x307/witan-gossip), a post-quantum gossip
+protocol engine (ML-KEM-768 + ML-DSA-65) built as a WebAssembly component.
 
-| Crate | What it does |
-|---|---|
-| [`witan`](https://github.com/0x307/witan-gossip) · [crates.io](https://crates.io/crates/witan) | Post-quantum gossip protocol runtime, built as a WebAssembly component. |
+## Audit status
 
-Each repository's README states what is production-grade and what is experimental. Security reports: see each repo's `SECURITY.md`.
+None of these crates has been independently audited, and none holds a CMVP / FIPS 140-3
+validation. "FIPS 203/204/205/206" means the algorithms follow those standards, not that the
+code is certified. Each repository's `SECURITY.md` lists its known issues and how to report a
+vulnerability (security@0x307.com). Each `STABILITY.md` states what counts as a breaking
+change and when a version is yanked.
