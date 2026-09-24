@@ -61,10 +61,6 @@ something it doesn't mention.
 
 ## Cryptography
 
-- **All post-quantum.** No classical asymmetric cryptography (RSA, elliptic curves,
-  pairings) enters the dependency graph. The only exception is recorded and deliberate:
-  `pqc-kem`'s X25519 + ML-KEM-768 hybrid, for key exchange. Maintainers check the resolved
-  dependency graph of every change against a deny list of classical cryptography.
 - **No new cryptographic constructions** without the lead architect's review. Composing
   existing, reviewed primitives is fine; inventing one is not.
 - **Compare secrets and MACs in constant time**, never with `==`.

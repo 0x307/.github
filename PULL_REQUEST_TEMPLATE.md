@@ -17,7 +17,6 @@
 - [ ] New behaviour has a test that fails without this change
 - [ ] Tests that something is refused also show the valid case accepted
 - [ ] README, docs and `CHANGELOG.md` updated, and every claim matches the code
-- [ ] No classical asymmetric cryptography added to the dependency graph
 - [ ] No new cryptographic construction (or: the lead architect has reviewed it)
 - [ ] New dependencies explained below; `cargo deny` clean
 - [ ] Nothing private: no internal links, hosts, credentials or personal details
